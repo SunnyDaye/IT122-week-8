@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Car Facts Button</title>
+</head>
+
+<body>
+    <button onclick="showCarFact()">Get a Car fact</button>
+
+    <p id="carfact"></p>
+    <script>
+        async function getCarFact() {
+            //you can change to differt type/model of Toytata
+            const model = "celica";
+            //
+            const api_endpoint = `https://api.api-ninjas.com/v1/cars?model=${model}`;
+            const response = await fetch(api_endpoint, {
+                //We need to get request and add/specify headers with Api-Key
+                headers: {
+                    'X-Api-Key': 'U2td7BdGa3qG+HXK2RcvQQ==AapTsjNKga7LC4Qz'
+                }
+            });
+            const json_response = await response.json();
+            console.log(json_response);
+            return json_response;
+        }
+        async function showCarFact() {
+            const carFactResponse = await getCarFact();
+            const paragraphTag = document.getElementById("carfact");
+            //Made changes on JSON.stringify with paramater (remove text, replace by carFactResponse)
+            paragraphTag.innerText = JSON.stringify(carFactResponse);
+            //API Key - U2td7BdGa3qG+HXK2RcvQQ==AapTsjNKga7LC4Qz          
+        }
+    </script>
+</body>
+</html>
